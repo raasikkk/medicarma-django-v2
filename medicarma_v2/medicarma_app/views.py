@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -42,7 +42,6 @@ def logout_view(request):
     else:
         return redirect('home')
 
-@login_required
 def home_view(request):
     products = Products.objects.all()[:4]
     return render(request, 'home/home.html', {'products': products})
@@ -51,3 +50,8 @@ def home_view(request):
 def protected_view(request):
     products = Products.objects.all()
     return render(request, 'products/products.html', {'products': products})
+
+@login_required
+def product_detail_view(request, product_id):
+    product = get_object_or_404(Products, id=product_id)
+    return render(request, 'products/product_detail.html', {'product': product})
