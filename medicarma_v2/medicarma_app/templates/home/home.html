@@ -120,7 +120,7 @@
                         <div class="last-p-card">
                             <img src="{{ product.image.url }}" alt="medicine">
                             <h3>{{ product.description }}</h3>
-                            <a href="#">Buy now</a>
+                            <a href="{% url 'product_detail' product.id %}">Buy now</a>
                         </div>
                     {% endfor %}
                 </div>

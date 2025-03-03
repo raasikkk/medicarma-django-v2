@@ -9,17 +9,170 @@
     <link rel="stylesheet" href="{% static "styles/styles.css" %}">
 </head>
 <body>
-    <h1>Hello user!</h1>
-
-    {% block content %}
-    <div class="product-detail">
-        <img src="{{ product.image.url }}" alt="{{ product.name }}">
-        <h1>{{ product.name }}</h1>
-        <p>{{ product.description }}</p>
-        <a href="#">Buy now</a>
+    <!-- Banner -->
+    <div class="banner">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-space"></div>
+                <div class="">Понедельник-Воскресенье с 10:00 до 19:00 </div>
+                <div class="banner-icons">
+                    <a href="#"><img src="{% static 'images/insta-logo.svg' %}" alt="insta"></a>
+                    <a href="#"><img src="{% static 'images/whatsapp-logo.svg' %}" alt="whatsapp"></a>
+                </div>
+            </div>
+        </div>
     </div>
-    {% endblock %}
+
+    <!-- Navbar -->
+     <nav class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <a href="#" class="navbar-logo">
+                    <img class="logo" src="{% static 'images/main-logo.svg' %}" alt="logo">
+                </a>
+                <div class="links">
+                    <button id="navbar-close" class="navbar-close">
+                        <img src="{% static 'images/close-icon.svg' %}" alt="close">
+                    </button>
+                    <ul class="navbar-menu">
+                        <li><a id="navbar-close" href="{% url 'home' %}">All Categories</a></li>
+                        <li><a id="navbar-close" href="{% url 'products' %}">Medicine</a></li>
+                        <li id="toggle-modal"><a id="navbar-close" href="#">Contacts</a></li>
+                    </ul>
+                </div>
+                <div class="navbar-profile">
+                    <div class="profile-holder">
+                        <div class="profile">
+                            <img src="{% static 'images/user-icon.svg' %}" alt="user-icon">
+                            <div class="">{{ request.user.username }}</div>
+                        </div>
+                        <!-- LOGOUT -->
+                        <form method='POST' action="{% url 'logout' %}" class="logout-button">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
+                    </div>
+                    <button class="navbar-toggle">
+                        <img src="{% static 'images/navbar-toggle.svg' %}" alt="navbar-toggle">
+                    </button>
+                </div>
+            </div>
+        </div>
+     </nav>
+
+     <div class="product-detail">
+        {% block content %}
+            <div class="">
+                <h1>{{ product.name }}</h1>
+                <p>{{ product.description }}</p>
+            </div>
+
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <a href="#">Buy now</a>
+        {% endblock %}
+    </div>
     
+       <!-- Timer -->
+       <div class="timer">
+          <div class="container">
+              <div class="timer-content">
+                  <h2>20% - скидка На Все Лекарства</h2>
+                  <h3>Улучшите своё здоровье с "Medicarma" и получите отличную цену</h3>
+                  <div class="deadline">
+                      <div class="deadline-format">
+                          <img src="{% static 'images/days-circle (1).png' %}" alt="">
+                          <h3>15</h3>
+                          <span>Дней</span>
+                      </div>
+                      <div class="deadline-format">
+                          <img src="{% static 'images/hours-circle (1).png' %}" alt="">
+                          <h3>22</h3>
+                          <span>Часов</span>
+                      </div>
+                      <div class="deadline-format">
+                          <img src="{% static 'images/minutes-circle (1).png' %}" alt="">
+                          <h3>23</h3>
+                          <span>Минут</span>
+                      </div>
+                      <div class="deadline-format">
+                          <img src="{% static 'images/seconds-circle (1).png' %}" alt="">
+                          <h3>49</h3>
+                          <span>Секунд</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+  
+  
+        <!-- Footer -->
+        <div class="footer">
+          <div class="container">
+              <div class="footer-content">
+                  <a href="#" class="footer-logo">
+                      <img class="logo" src="{% static 'images/main-logo.svg' %}" alt="logo">
+                  </a>
+                  <div class="footer-links">
+                      <ul>
+                          <h3>Информация</h3>
+                          <li><a href="#">О нас</a></li>
+                          <li><a href="#">Услуги</a></li>
+                          <li><a href="#">Наши преёимущества</a></li>
+                          <li><a href="#">Последние поступления</a></li>
+                          <li><a href="#">Контакты</a></li>
+                      </ul>
+                      <ul>
+                          <h3>Медицина</h3>
+                          <li><a href="#">Лекарственные Препараты</a></li>
+                          <li><a href="#">Витамины и БАДы</a></li>
+                          <li><a href="#">Медицинские Товары</a></li>
+                          <li><a href="#">Консультация Фармацевта</a></li>
+                          <li><a href="#">Акции и Скидки</a></li>
+                      </ul>
+                      <ul>
+                          <h3>Контакты</h3>
+                          <li><a href="#">Атырау - Курмангазы 106</a></li>
+                          <li><a href="#">Актау - мкр 29а, 112/2</a></li>
+                          <li><a href="#">Актобе - Ул.Нокина 34А</a></li>
+                          <button>Связаться</button>
+                      </ul>
+                  </div>
+              </div>
+              <div class="line"></div>
+              <div class="author">created by Zhankeldyuly Rasul / @raasikkk</div>
+          </div>
+      </div>
+  
+      <!-- MODAL -->
+      <div class="contact-modal">
+          <div class="contact-content">
+              <h3>Наши Контакты :</h3>
+              <button id="close-modal"><img src="{% static 'images/close-icon.svg' %}" alt=""></button>
+              <div class="contact-card">
+                  <span>
+                      <h4>Атырау</h4>
+                      <img src="{% static 'images/insta-logo.svg' %}" alt="">
+                  </span>
+                  <p>Атырау, Айтеке-би 19а</p>
+              </div>
+              <div class="contact-card">
+                  <span>
+                      <h4>Актау</h4>
+                      <img src="{% static 'images/insta-logo.svg' %}" alt="">
+                  </span>
+                  <p>Атырау, Айтеке-би 19а</p>
+              </div>
+              <div class="contact-card">
+                  <span>
+                      <h4>Актобе</h4>
+                      <img src="{% static 'images/insta-logo.svg' %}" alt="">
+                  </span>
+                  <p>Атырау, Айтеке-би 19а</p>
+              </div>
+          </div>
+      </div>
+
     <script src="{% static "js/index.js" %}"></script>
 </body>
 </html>

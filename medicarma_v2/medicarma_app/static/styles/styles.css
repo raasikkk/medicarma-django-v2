@@ -628,6 +628,14 @@ button {
     text-align: start;
 }
 
+/* Product Detail */
+.product-detail {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
 /* MEDIA QUERIES */
 @media (min-width: 640px) { /* sm */
     .container {
